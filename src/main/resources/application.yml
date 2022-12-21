@@ -1,0 +1,48 @@
+server:
+  port: 9002 # 서버 사용 포트
+  tomcat:
+    accesslog:
+      enabled: false   # access 로그 추가
+    basedir: /home/opcl/logs/access
+  servlet:
+    session:
+      timeout: 3600s # 기본 30분이며 60s 미만 설정시 60초로 된다.
+
+spring:
+  application:
+    name: oauth-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://141.164.61.114:3306/temeethb?serverTimezone=UTC&characterEncoding=UTF-8
+    username: lntemeetuser
+    password: Temeet2580!@#$
+  jpa: # DB 쿼리 작성 없이 코드로 쉽게 데이터를 처리함
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  main:
+    allow-bean-definition-overriding: true # userDetailService 스프링제공 함수 사용 안함, 개발자 정의 함수 사용
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: /oauth/token_key
+
+  sql:
+    init:
+      mode: ALWAYS    # 불필요하면 나중에 이 부분은 NEVER로 변경
+
+
+eureka :
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://admin:admin2580@${eureka.instance.hostname}:9000/eureka/
+
+token:
+  secret: lnworkskey2580lnworkskey2580lnworkskey2580lnworkskey2580lnworkskey2580lnworkskey2580
+
