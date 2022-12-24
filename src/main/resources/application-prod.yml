@@ -8,21 +8,15 @@ server:
     session:
       timeout: 3600s # 기본 30분이며 60s 미만 설정시 60초로 된다.
 
-eureka :
-  instance:
-    hostname: 141.164.61.114
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://admin:admin2580@${eureka.instance.hostname}:9000/eureka/
-
 spring:
+  config:
+    activate:
+      on-profile: prod
   application:
     name: oauth-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://${eureka.instance.hostname}:3306/temeethb?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://141.164.61.114:3306/temeethb?serverTimezone=UTC&characterEncoding=UTF-8
     username: lntemeetuser
     password: Temeet2580!@#$
   jpa: # DB 쿼리 작성 없이 코드로 쉽게 데이터를 처리함
@@ -41,6 +35,15 @@ spring:
   sql:
     init:
       mode: ALWAYS    # 불필요하면 나중에 이 부분은 NEVER로 변경
+
+eureka :
+  instance:
+    hostname: 141.164.61.114
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://admin:admin2580@${eureka.instance.hostname}:9000/eureka/
 
 token:
   secret: ifoundicouldsaythingswithcolorandshapesthaticouldntsayanyotherwaythingsihadnowordsforlnworkskey2580

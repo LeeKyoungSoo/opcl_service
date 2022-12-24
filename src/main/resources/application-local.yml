@@ -9,6 +9,9 @@ server:
       timeout: 3600s # 기본 30분이며 60s 미만 설정시 60초로 된다.
 
 spring:
+  config:
+    activate:
+      on-profile: local
   application:
     name: oauth-service
   datasource:
